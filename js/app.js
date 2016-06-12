@@ -18,6 +18,7 @@ app.AppRouter = Backbone.Router.extend({
 			this.homeView = new app.HomeView({ el: "#content" });
 		this.homeView.render();
 		document.title = this.title() + " - Home";
+		this.setActiveNav("nav-home");
 	},
 
 	create: function() {
@@ -26,6 +27,7 @@ app.AppRouter = Backbone.Router.extend({
 			this.createView = new app.CreateView({ el: "#content", collection: this.sizes });
 		this.createView.render();
 		document.title = this.title() + " - Create";
+		this.setActiveNav("nav-create");
 	},
 
 	credit: function() {
@@ -33,6 +35,7 @@ app.AppRouter = Backbone.Router.extend({
 			this.creditsView = new app.CreditsView({ el: "#content" });
 		this.creditsView.render();
 		document.title = this.title() + " - Credits";
+		this.setActiveNav("nav-credits");
 	},
 
 	showPuzzle: function(encode) {
@@ -45,6 +48,11 @@ app.AppRouter = Backbone.Router.extend({
 
 	title: function() {
 		return "Picross";
+	},
+
+	setActiveNav: function(id) {
+		$("nav li a").removeClass("active");
+		$(`nav li a#${id}`).addClass("active");
 	},
 
 	loadSizes: function() {

@@ -8,11 +8,15 @@ body {
 a {
 	color: inherit;
 	text-decoration: none;
+	border-bottom: 2px solid transparent;
 }
 
 a:hover {
-	text-decoration: underline;
 	color: #0c6e8c;
+}
+
+a.active {
+	border-bottom: 2px solid #353535;
 }
 
 header {
@@ -24,9 +28,6 @@ header h1 {
 	padding: 10px 15px;
 }
 
-nav {
-}
-
 nav ul {
 	list-style-type: none;
 	padding: 0;
@@ -35,8 +36,11 @@ nav ul {
 
 nav ul li {
 	display: inline-block;
+}
+
+nav ul li a {
+	display: inline-block;
 	padding: 10px 15px;
-	/*padding: 10px 0px;*/
 }
 
 main {
@@ -51,4 +55,22 @@ main {
 	margin-left: auto;
 	margin-right: auto;
 	box-sizing: border-box;
+}
+
+#size-index {
+	font-size: 1.5em;
+	width: 200px;
+}
+
+#create-btn {
+	border-radius: 2px;
+	width: 200px;
+	padding: 10px 0;
+	font-size: 1.5em;
+	background-color: #CECECE;
+	border: 1px solid #353535;
+}
+
+#create-btn:hover {
+	border: 1px solid transparent;
 }
