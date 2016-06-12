@@ -4,7 +4,7 @@ app.PuzzleSize = Backbone.Model.extend({
 	defaults: {
 		rows: 15,
 		cols: 15,
-		selected: false
+		defaultSelected: false
 	},
 
 	initialize: function() {

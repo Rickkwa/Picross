@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Picross</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
 	<header>
@@ -35,10 +36,12 @@
 	<script type="text/template" id="create-template">
 		<section>
 			<h2>Step 1: Choose a size</h2>
-			<select>
-				<% _.each(sizes, function(size) { %>
-				<option <%= size.selected ? "selected" : "" %>><%- size.rows + " x " + size.cols %></option>
-				<% }); %>
+			<select id="size-index">
+				<% for (let i = 0; i < sizes.length; i++) { 
+					let size = sizes.at(i);
+				%>
+				<option <%= size.get('defaultSelected') ? "selected" : "" %> value="<%= i %>"><%- size.get('rows') + " x " + size.get('cols') %></option>
+				<% } %>
 			</select>
 		</section>
 
