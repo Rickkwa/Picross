@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<header>
+		<div>
+			<h1>Picross</h1>
+		</div>
+		<nav>
+			<a href="#">Home</a>
+			<a href="#create">Create</a>
+			<a href="#credits">Credits</a>
+		</nav>
+	</header>
+
+	<section id="content"></section>
+
+	<!-- Templates -->
+	<script type="text/template" id="home-template">
+		<div>
+		Description of what Picross is, along with some images.
+		</div>
+	</script>
+
+	<script type="text/template" id="credit-template">
+		<div>
+		Application made by Ricky K. Source code available at: _____
+		</div>
+	</script>
+	
+	<!-- Vendors -->
+	<script src="js/vendor/jquery-3.0.0.js"></script>
+	<script src="js/vendor/underscore.js"></script>
+	<script src="js/vendor/backbone.js"></script>
+
+	<!-- Models -->
+
+	<!-- Views -->
+	<script src="js/views/home.js"></script>
+	<script src="js/views/credits.js"></script>
+
+	<!-- App and router -->
+	<script src="js/app.js"></script>
+
+</body>
+</html>
