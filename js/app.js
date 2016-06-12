@@ -39,13 +39,18 @@ app.AppRouter = Backbone.Router.extend({
 	},
 
 	showPuzzle: function(encode) {
+		var gridModel = new app.Grid();
+		gridModel.decode(encode);
+
 		if (!this.puzzleView)
-			this.puzzleView = new app.PuzzleView({ el: "#content" });
+			this.puzzleView = new app.PuzzleView({ el: "#content", model: gridModel });
 		this.puzzleView.render();
 		document.title = this.title("Play");
+		this.setActiveNav();
 	},
 
 	showAnswer: function(encode) {
+		// Create puzzle view with custom option that tells it to show answer?
 	},
 
 	// Below are Helper functions
@@ -54,9 +59,10 @@ app.AppRouter = Backbone.Router.extend({
 		return "Picross" + ((slug != "") ? " - " + slug : "");
 	},
 
-	setActiveNav: function(id) {
+	setActiveNav: function(id=null) {
 		$("nav li a").removeClass("active");
-		$(`nav li a#${id}`).addClass("active");
+		if (id)
+			$(`nav li a#${id}`).addClass("active");
 	},
 
 	loadSizes: function() {

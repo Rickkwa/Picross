@@ -8,10 +8,19 @@ app.PuzzleView = Backbone.View.extend({
 
 	render: function() {
 		this.$el.html(this.template());
+
+		this.grid = this.model;
+		this.drawPuzzle();
+
+		return this;
 	},
 
 	events: {
 		"click .do-print": "printDialog"
+	},
+
+	drawPuzzle: function() {
+		
 	},
 
 	printDialog: function() {

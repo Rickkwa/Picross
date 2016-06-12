@@ -2,11 +2,17 @@ var app = app || {};
 
 app.Grid = Backbone.Model.extend({
 	defaults: {
-		size: null,
+		size: new app.PuzzleSize(),
 		grid: []
 	},
 
 	initialize: function() {
+		this.clearGrid();
+	},
+
+	clearGrid: function() {
+		this.set({ 'grid' : this.defaults.grid });
+
 		// Create the 2D array and initialize to 0
 		let rows = this.get('size').rows();
 		let cols = this.get('size').cols();
@@ -33,6 +39,9 @@ app.Grid = Backbone.Model.extend({
 		return this.get('grid')[r][c];
 	},
 
+	equals: function() {
+	},
+
 	encode: function() {
 		// Encode the 2D grid into a 1D value
 
@@ -52,11 +61,13 @@ app.Grid = Backbone.Model.extend({
 	decode: function(str) {
 		// Decode the string and set the model's size and grid to reflect
 		var rows = str.split(",");
-		for (let row of rows) {
-			for (let col = 0; col < row.length; col++) {
-				this.setState(row, col, row[col]);
+		this.set({ 'size' : new app.PuzzleSize({ rows: rows.length, cols: rows[0].length }) });
+		this.clearGrid();
+
+		for (let r = 0; r < rows.length; r++) {
+			for (let c = 0; c < rows[r].length; c++) {
+				this.setState(r, c, rows[r][c]);
 			}
 		}
-		this.get('size') = new app.PuzzleSize({ rows: rows.length, cols: rows[0].length });
 	}
 });

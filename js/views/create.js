@@ -31,18 +31,8 @@ app.CreateView = Backbone.View.extend({
 	},
 
 	doCreate: function() {
-		// encode the grid
-		// Send to route
-		console.log("Click");
-		for (let r = 0; r < this.grid.getRows(); r++) {
-			let s = "";
-			for (let c = 0; c < this.grid.getCols(); c++) {
-				s += this.grid.getState(r, c) + " ";
-			}
-			console.log(s);
-		}
+		// Encode the grid and send to route
 		console.log(this.grid.encode());
-
 		app.router.navigate("puzzle/" + this.grid.encode(), true);
 	},
 
@@ -98,7 +88,6 @@ app.CreateView = Backbone.View.extend({
 				let $col = $("<td></td>");
 				$col.addClass("grid-tile");
 				$col.data("coords", { row: r, col: c });
-				$col.data("coordsStr", r + "-" + c);
 				$row.append($col);
 			}
 			$table.append($row);

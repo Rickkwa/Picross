@@ -28,15 +28,27 @@
 
 	<!-- Templates -->
 	<script type="text/template" id="home-template">
-		<div>
-		Description of what Picross is, along with some images.
-		</div>
+		<section>
+			<p>
+			Picross (also known as nonograms) is a picture based logic puzzle. You're given a grid with hints on the outer edges; using these hints, you must fill in the grid to reveal the picture answer.
+			</p>
+		</section>
 	</script>
 
 	<script type="text/template" id="credit-template">
-		<div>
-		Application made by Ricky K. Source code available at: _____
-		</div>
+		<section>
+			<p>
+				Made by Ricky Kwan. Source code available on <a href="https://github.com/Rickkwa/Picross" target="_blank">GitHub</a>.
+			</p>
+			<p>
+				The application was made using the following JavaScript libraries:
+				<ul>
+					<li><a href="https://jquery.com/" target="_blank">jQuery</a></li>
+					<li><a href="http://underscorejs.org/" target="_blank">Underscore</a></li>
+					<li><a href="http://backbonejs.org/" target="_blank">Backbone</a></li>
+				</ul>
+			</p>
+		</section>
 	</script>
 
 	<script type="text/template" id="create-template">
@@ -74,6 +86,7 @@
 		</section>
 
 		<section>
+			<div class="grid-container" oncontextmenu="return false"></div>
 		</section>
 	</script>
 	
