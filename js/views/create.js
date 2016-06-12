@@ -34,9 +34,21 @@ app.CreateView = Backbone.View.extend({
 		// encode the grid
 		// Send to route
 		console.log("Click");
+		for (let r = 0; r < this.grid.getRows(); r++) {
+			let s = "";
+			for (let c = 0; c < this.grid.getCols(); c++) {
+				s += this.grid.getState(r, c) + " ";
+			}
+			console.log(s);
+		}
+		console.log(this.grid.encode());
+
+		app.router.navigate("puzzle/" + this.grid.encode(), true);
 	},
 
 	tileHandler: function(e) {
+		e.preventDefault();
+
 		// Handles mouseover and mousedown events
 		switch (e.buttons) {
 			case 1: // left click
@@ -49,15 +61,14 @@ app.CreateView = Backbone.View.extend({
 	},
 
 	setTile: function($tile, state) {
-		// Fill/Unfill the tile based on state
-		// Set the grid model to reflect
-
 		if (this.grid) {
+			// Fill/Unfill the tile based on state
 			if (state == 1)
 				$tile.addClass("fill");
 			else
 				$tile.removeClass("fill");
 
+			// Set the grid model to reflect
 			let {row, col} = $tile.data("coords");
 			this.grid.setState(row, col, state);
 		}
@@ -74,16 +85,16 @@ app.CreateView = Backbone.View.extend({
 		// Draw a new grid
 		var $container = $(".grid-container");
 		this.grid = new app.Grid({ size: size });
-		this.drawGrid($container, this.grid);
+		this.drawGrid($container);
 		// TODO: Change tile size based on container width
 	},
 
-	drawGrid: function($container, gridModel) {
+	drawGrid: function($container) {
 		var $table = $("<table></table>");
 
-		for (let r = 0; r < gridModel.getRows(); r++) {
+		for (let r = 0; r < this.grid.getRows(); r++) {
 			let $row = $("<tr></tr>");
-			for (let c = 0; c < gridModel.getCols(); c++) {
+			for (let c = 0; c < this.grid.getCols(); c++) {
 				let $col = $("<td></td>");
 				$col.addClass("grid-tile");
 				$col.data("coords", { row: r, col: c });

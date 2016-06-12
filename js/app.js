@@ -17,7 +17,7 @@ app.AppRouter = Backbone.Router.extend({
 		if (!this.homeView)
 			this.homeView = new app.HomeView({ el: "#content" });
 		this.homeView.render();
-		document.title = this.title() + " - Home";
+		document.title = this.title("Home");
 		this.setActiveNav("nav-home");
 	},
 
@@ -26,7 +26,7 @@ app.AppRouter = Backbone.Router.extend({
 		if (!this.createView)
 			this.createView = new app.CreateView({ el: "#content", collection: this.sizes });
 		this.createView.render();
-		document.title = this.title() + " - Create";
+		document.title = this.title("Create");
 		this.setActiveNav("nav-create");
 	},
 
@@ -34,11 +34,15 @@ app.AppRouter = Backbone.Router.extend({
 		if (!this.creditsView)
 			this.creditsView = new app.CreditsView({ el: "#content" });
 		this.creditsView.render();
-		document.title = this.title() + " - Credits";
+		document.title = this.title("Credits");
 		this.setActiveNav("nav-credits");
 	},
 
 	showPuzzle: function(encode) {
+		if (!this.puzzleView)
+			this.puzzleView = new app.PuzzleView({ el: "#content" });
+		this.puzzleView.render();
+		document.title = this.title("Play");
 	},
 
 	showAnswer: function(encode) {
@@ -46,8 +50,8 @@ app.AppRouter = Backbone.Router.extend({
 
 	// Below are Helper functions
 
-	title: function() {
-		return "Picross";
+	title: function(slug="") {
+		return "Picross" + ((slug != "") ? " - " + slug : "");
 	},
 
 	setActiveNav: function(id) {
@@ -68,5 +72,5 @@ app.AppRouter = Backbone.Router.extend({
 	}
 });
 
-var router = new app.AppRouter();
+app.router = new app.AppRouter();
 Backbone.history.start();
