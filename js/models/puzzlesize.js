@@ -11,6 +11,14 @@ app.PuzzleSize = Backbone.Model.extend({
 		this.validationSetup();
 	},
 
+	rows: function() {
+		return parseInt(this.get('rows'));
+	},
+
+	cols: function() {
+		return parseInt(this.get('cols'));
+	},
+
 	validationSetup: function() {
 		this.validators = {};
 
