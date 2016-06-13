@@ -9,8 +9,8 @@ app.PuzzleView = Backbone.View.extend({
 	render: function() {
 		this.$el.html(this.template());
 
-		this.grid = this.model;
-		this.drawPuzzle();
+		this.gridModel = this.model;
+		this.drawPuzzle($(".grid-container"));
 
 		return this;
 	},
@@ -19,11 +19,109 @@ app.PuzzleView = Backbone.View.extend({
 		"click .do-print": "printDialog"
 	},
 
-	drawPuzzle: function() {
-		console.log(this.grid.get('grid'));
+	drawPuzzle: function($container) {
+		var hints = this.getHints();
+
+		console.log(hints);
+		// console.log(this.gridModel.get('grid'));
+
+		var totalRows = this.gridModel.getRows() + hints.colHints.maxSize;
+		var totalCols = this.gridModel.getCols() + hints.rowHints.maxSize;
+
+		// var rHints = hints.rowHints.hints;
+		// var cHints = hints.colHints.hints;
+
+		// Pad them both by mapping each of them
+		// In the map, can calculate missing length and create an array/string of that length and concat
+
+
+		var $table = $("<table></table>");
+		for (let r  = 0; r < totalRows; r++) {
+			let $row = $("<tr></tr>");
+			for (let c = 0; c < totalCols; c++) {
+				let $col = $("<td></td>");
+				$col.text(" ");
+				if (r < hints.colHints.maxSize) {
+					if (c >= hints.rowHints.maxSize) {
+						// Make top hint
+						$col.addClass("top-hint-tile");
+						$col.text(hints.colHints.hints[c - hints.rowHints.maxSize][r]);
+					} 
+					else {
+						$col.addClass("hide");
+					}
+				}
+				else {
+					if (c < hints.rowHints.maxSize) {
+						// Make left hint
+						$col.addClass("left-hint-tile");
+						$col.text(hints.rowHints.hints[r - hints.colHints.maxSize][c]);
+					}
+					else {
+						// Draw playing tile
+						$col.addClass("grid-tile");
+					}
+				}
+				if (c == hints.rowHints.maxSize - 1 || r == hints.colHints.maxSize - 1)
+					$col.addClass("edge");
+
+				$row.append($col);
+			}
+			$table.append($row);
+		}
+		$container.empty().append($table);
+	},
+
+	getHints: function() {
+		/* Return an object of form:
+			{
+				rowHints: {
+					maxSize: int // max # of columns to hold all hints
+					hints: [[]] // row and col of hint
+				},
+				colHints: ...
+			}
+		*/
+		var [rMaxSize, cMaxSize] = [0, 0];
+		var [rHints, cHints] = [[], []];
+
+		var rows = this.gridModel.get('grid');
+		var cols = app.utils.transpose(rows);
+
+		// Do rows
+		for (let r = 0; r < rows.length; r++) {
+			let hints = this._hintsFrom1DArray(rows[r]);
+			rMaxSize = Math.max(rMaxSize, hints.length);
+			rHints.push(hints);
+		}
+
+		// Do cols
+		for (let c = 0; c < cols.length; c++) {
+			let hints = this._hintsFrom1DArray(cols[c]);
+			cMaxSize = Math.max(cMaxSize, hints.length);
+			cHints.push(hints);
+		}
+
+		return { 
+			rowHints: { maxSize: rMaxSize, hints: rHints }, 
+			colHints: { maxSize: cMaxSize, hints: cHints }
+		};
 	},
 
 	printDialog: function() {
 		window.print();
+	},
+
+	_hintsFrom1DArray: function(arr) {
+		// Given 1D array of binary (whether it represent the row or column), return the hints for it as an array
+
+		// Create binary string
+		var bin = arr.join("");
+
+		// Trim leading/trailing 0s
+		bin = bin.replace(/(^[0]+|[0]+$)/g, "");
+
+		// Split by 0s, and count each element
+		return bin.split(/[0]+/).map(v => v.length);
 	}
 });

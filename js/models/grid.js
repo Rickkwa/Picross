@@ -68,7 +68,7 @@ app.Grid = Backbone.Model.extend({
 			for (let i = 0; i < rows[r].length; i++) {
 				let char = rows[r].charAt(i);
 				let dec = this.decodeCharToNum(char);
-				let bin = this._leftPad(this._dec2bin(dec), "0", 5);
+				let bin = app.utils.leftPad(app.utils.dec2bin(dec), "0", 5);
 				// console.log(bin);
 				for (let c = 0; c < bin.length; c++) {
 					this.setState(r, (i * 5) + c, bin.charAt(c));
@@ -109,24 +109,5 @@ app.Grid = Backbone.Model.extend({
 		if (/^\d+$/.test(char))
 			return parseInt(char) + 25;
 		return char.charCodeAt(0) - 97; // 'a' is ASCII 97, and we want to return 0
-	},
-
-	_dec2bin: function(dec) {
-		// From http://stackoverflow.com/a/16155417/2079781
-		return (dec >>> 0).toString(2);
-	},
-
-	_leftPad: function(str, pad, targetLength) {
-		// Pad the string str with character pad until the string is of length targetLength
-		var result = str;
-		var diff = targetLength - str.length;
-
-		while (diff > 0) {
-			if (diff % 2 == 1)
-				result = pad + result;
-			pad = pad + pad;
-			diff = Math.floor(diff / 2);
-		}
-		return result;
 	}
 });

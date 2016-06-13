@@ -3,8 +3,8 @@
 }
 
 .grid-tile {
-	width: 20px;
-	height: 20px;
+	/*width: 25px;
+	height: 25px;*/
 	background-color: white;
 	padding: 0;
 }
@@ -13,10 +13,36 @@
 	border: 1px solid black;
 	width: 25px;
 	height: 25px;
-	text-align: center;
-	font-family: "New Courier";
 }
 
 .grid-container td.fill {
 	background-color: #cecece;
+}
+
+.grid-container .left-hint-tile, .grid-container .top-hint-tile {
+	text-align: center;
+	font-family: "New Courier";
+}
+
+.grid-container .left-hint-tile {
+	border-left: 1px solid transparent; 
+	border-right: 1px solid transparent;
+}
+
+.grid-container .top-hint-tile {
+	border-top: 1px solid transparent; 
+	border-bottom: 1px solid transparent;
+}
+
+.grid-container .top-hint-tile.edge {
+	border-bottom: 3px solid #353535;
+}
+
+.grid-container .left-hint-tile.edge {
+	border-right: 3px solid #353535;
+}
+
+.hide {
+	visibility: hidden;
+	border: none;
 }
