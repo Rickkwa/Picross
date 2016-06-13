@@ -20,7 +20,7 @@ app.PuzzleView = Backbone.View.extend({
 	},
 
 	drawPuzzle: function() {
-		
+		console.log(this.grid.get('grid'));
 	},
 
 	printDialog: function() {

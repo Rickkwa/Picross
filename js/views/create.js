@@ -32,7 +32,6 @@ app.CreateView = Backbone.View.extend({
 
 	doCreate: function() {
 		// Encode the grid and send to route
-		console.log(this.grid.encode());
 		app.router.navigate("puzzle/" + this.grid.encode(), true);
 	},
 
