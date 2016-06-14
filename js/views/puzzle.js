@@ -28,39 +28,34 @@ app.PuzzleView = Backbone.View.extend({
 		var totalRows = this.gridModel.getRows() + hints.colHints.maxSize;
 		var totalCols = this.gridModel.getCols() + hints.rowHints.maxSize;
 
-		// var rHints = hints.rowHints.hints;
 		// var cHints = hints.colHints.hints;
 
 		// Pad them both by mapping each of them
-		// In the map, can calculate missing length and create an array/string of that length and concat
-
+		var rHints = hints.rowHints.hints.map(arr => app.utils.arrLeftPad(arr, " ", hints.rowHints.maxSize));
+		var cHints = hints.colHints.hints.map(arr => app.utils.arrLeftPad(arr, " ", hints.colHints.maxSize));
 
 		var $table = $("<table></table>");
 		for (let r  = 0; r < totalRows; r++) {
 			let $row = $("<tr></tr>");
 			for (let c = 0; c < totalCols; c++) {
 				let $col = $("<td></td>");
-				$col.text(" ");
 				if (r < hints.colHints.maxSize) {
 					if (c >= hints.rowHints.maxSize) {
 						// Make top hint
 						$col.addClass("top-hint-tile");
-						$col.text(hints.colHints.hints[c - hints.rowHints.maxSize][r]);
+						$col.text(cHints[c - hints.rowHints.maxSize][r]);
 					} 
-					else {
+					else
 						$col.addClass("hide");
-					}
 				}
 				else {
 					if (c < hints.rowHints.maxSize) {
 						// Make left hint
 						$col.addClass("left-hint-tile");
-						$col.text(hints.rowHints.hints[r - hints.colHints.maxSize][c]);
+						$col.text(rHints[r - hints.colHints.maxSize][c]);
 					}
-					else {
-						// Draw playing tile
+					else // Draw playing tile
 						$col.addClass("grid-tile");
-					}
 				}
 				if (c == hints.rowHints.maxSize - 1 || r == hints.colHints.maxSize - 1)
 					$col.addClass("edge");

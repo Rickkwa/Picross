@@ -3,16 +3,17 @@ var app = app || {};
 app.utils = {
 	leftPad: function(str, pad, targetLength) {
 		// Pad the string str with character pad until the string is of length targetLength
-		var result = str;
 		var diff = targetLength - str.length;
+		if (diff <= 0)
+			return str;
+		return new Array(diff + 1).join(pad) + str; // http://stackoverflow.com/a/14343876/2079781
+	},
 
-		while (diff > 0) {
-			if (diff % 2 == 1)
-				result = pad + result;
-			pad = pad + pad;
-			diff = Math.floor(diff / 2);
-		}
-		return result;
+	arrLeftPad: function(arr, pad, targetLength) {
+		var diff = targetLength - arr.length;
+		if (diff <= 0)
+			return arr;
+		return new Array(diff + 1).join(pad).split("").concat(arr);
 	},
 
 	dec2bin: function(dec) {
