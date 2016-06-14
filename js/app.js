@@ -10,43 +10,33 @@ app.AppRouter = Backbone.Router.extend({
 	},
 
 	initialize: function() {
-		
+		this.activeView = null;
 	},
 
 	home: function() {
-		if (!this.homeView)
-			this.homeView = new app.HomeView({ el: "#content" });
-		this.homeView.render();
+		this.setView(app.HomeView);
 		document.title = this.title("Home");
 		this.setActiveNav("nav-home");
 	},
 
 	create: function() {
 		this.loadSizes();
-		if (!this.createView)
-			this.createView = new app.CreateView({ el: "#content", collection: this.sizes });
-		this.createView.render();
+		this.setView(app.CreateView, { collection: this.sizes });
 		document.title = this.title("Create");
 		this.setActiveNav("nav-create");
 	},
 
 	credit: function() {
-		if (!this.creditsView)
-			this.creditsView = new app.CreditsView({ el: "#content" });
-		this.creditsView.render();
+		this.setView(app.CreditsView);
 		document.title = this.title("Credits");
 		this.setActiveNav("nav-credits");
 	},
 
 	showPuzzle: function(encode) {
-		if (this.puzzleView)
-			this.puzzleView.model.decode(encode);
-		else {
-			var gridModel = new app.Grid();
-			gridModel.decode(encode);
-			this.puzzleView = new app.PuzzleView({ el: "#content", model: gridModel });
-		}
-		this.puzzleView.render();
+		var gridModel = new app.Grid();
+		gridModel.decode(encode);
+
+		this.setView(app.PuzzleView, { model: gridModel });
 		document.title = this.title("Play");
 		this.setActiveNav();
 	},
@@ -56,6 +46,19 @@ app.AppRouter = Backbone.Router.extend({
 	},
 
 	// Below are Helper functions
+
+	setView: function(viewClass, otherArgs={}) {
+		var container = "#content";
+		var $innerContainer = $("<span></span>").addClass("inner-wrapper");
+		$(container).append($innerContainer);
+		if (this.activeView)
+			this.activeView.remove();
+
+		var args = { el: $innerContainer.get(0) };
+		$.extend(args, otherArgs);
+		this.activeView = new viewClass(args);
+		this.activeView.render();
+	},
 
 	title: function(slug="") {
 		return "Picross" + ((slug != "") ? " - " + slug : "");
