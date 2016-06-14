@@ -15,7 +15,7 @@ app.CreateView = Backbone.View.extend({
 		this.$el.html(this.template({ sizes: this.collection })); // Sending collection to view: http://jsfiddle.net/superhacker/P2JR8/3/
 
 		// Global model
-		this.grid = null;
+		this.gridModel = null;
 
 		// Draw the initial grid
 		this.newPuzzle();
@@ -32,7 +32,7 @@ app.CreateView = Backbone.View.extend({
 
 	doCreate: function() {
 		// Encode the grid and send to route
-		app.router.navigate("puzzle/" + this.grid.encode(), true);
+		app.router.navigate("puzzle/" + this.gridModel.encode(), true);
 	},
 
 	tileHandler: function(e) {
@@ -50,7 +50,7 @@ app.CreateView = Backbone.View.extend({
 	},
 
 	setTile: function($tile, state) {
-		if (this.grid) {
+		if (this.gridModel) {
 			// Fill/Unfill the tile based on state
 			if (state == 1)
 				$tile.addClass("fill");
@@ -59,7 +59,7 @@ app.CreateView = Backbone.View.extend({
 
 			// Set the grid model to reflect
 			let {row, col} = $tile.data("coords");
-			this.grid.setState(row, col, state);
+			this.gridModel.setState(row, col, state);
 		}
 	},
 
@@ -73,7 +73,7 @@ app.CreateView = Backbone.View.extend({
 
 		// Draw a new grid
 		var $container = $(".grid-container");
-		this.grid = new app.Grid({ size: size });
+		this.gridModel = new app.Grid({ size: size });
 		this.drawGrid($container);
 		// TODO: Change tile size based on container width
 	},
@@ -81,9 +81,9 @@ app.CreateView = Backbone.View.extend({
 	drawGrid: function($container) {
 		var $table = $("<table></table>");
 
-		for (let r = 0; r < this.grid.getRows(); r++) {
+		for (let r = 0; r < this.gridModel.getRows(); r++) {
 			let $row = $("<tr></tr>");
-			for (let c = 0; c < this.grid.getCols(); c++) {
+			for (let c = 0; c < this.gridModel.getCols(); c++) {
 				let $col = $("<td></td>");
 				$col.addClass("grid-tile");
 				$col.data("coords", { row: r, col: c });
