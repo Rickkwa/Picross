@@ -22,13 +22,8 @@ app.PuzzleView = Backbone.View.extend({
 	drawPuzzle: function($container) {
 		var hints = this.getHints();
 
-		console.log(hints);
-		// console.log(this.gridModel.get('grid'));
-
 		var totalRows = this.gridModel.getRows() + hints.colHints.maxSize;
 		var totalCols = this.gridModel.getCols() + hints.rowHints.maxSize;
-
-		// var cHints = hints.colHints.hints;
 
 		// Pad them both by mapping each of them
 		var rHints = hints.rowHints.hints.map(arr => app.utils.arrLeftPad(arr, " ", hints.rowHints.maxSize));
@@ -54,8 +49,14 @@ app.PuzzleView = Backbone.View.extend({
 						$col.addClass("left-hint-tile");
 						$col.text(rHints[r - hints.colHints.maxSize][c]);
 					}
-					else // Draw playing tile
+					else {
+						// Draw playing tile
 						$col.addClass("grid-tile");
+						if ((c - hints.rowHints.maxSize) % 5 == 0)
+							$col.addClass("left-landmark-tile");
+						if ((r - hints.colHints.maxSize) % 5 == 0)
+							$col.addClass("top-landmark-tile");
+					}
 				}
 				if (c == hints.rowHints.maxSize - 1 || r == hints.colHints.maxSize - 1)
 					$col.addClass("edge");

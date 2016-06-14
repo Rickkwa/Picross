@@ -42,6 +42,14 @@
 	border-right: 3px solid #353535;
 }
 
+.grid-container .left-landmark-tile {
+	border-left: 2px solid #353535;
+}
+
+.grid-container .top-landmark-tile {
+	border-top: 2px solid #353535;
+}
+
 .hide {
 	visibility: hidden;
 	border: none;
