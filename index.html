@@ -81,11 +81,17 @@
 	</script>
 
 	<script type="text/template" id="puzzle-template">
+		<link rel="stylesheet" type="text/css" media="print" href="css/print-puzzle.css" />
+
 		<section class="instructions">
 			Solve the puzzle here or <button class="do-print">Print</button> it out.
 		</section>
 
-		<section>
+		<section class="print-only print-instructions">
+			Create your own Picross puzzles at http://rickkwa.github.io/demo/picross
+		</section>
+
+		<section class="grid-container-wrapper">
 			<div class="grid-container" oncontextmenu="return false"></div>
 		</section>
 	</script>

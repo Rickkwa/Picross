@@ -90,3 +90,17 @@ main {
 #create-btn:hover {
 	border: 1px solid transparent;
 }
+
+.instructions {
+	margin-bottom: 30px;
+}
+
+.print-only {
+	display: none;
+}
+
+@media print {
+	.print-only {
+		display: inline-block;
+	}
+}
