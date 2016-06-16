@@ -22,23 +22,24 @@
 	font-family: "New Courier";
 }
 
-.grid-container .left-hint-tile, .grid-container .h-trans-border {
+.grid-container .left-hint-tile {
 	border-left: 1px solid transparent; 
 	border-right: 1px solid transparent;
 }
 
-.grid-container .top-hint-tile, .grid-container .v-trans-border {
+.grid-container .top-hint-tile {
 	border-top: 1px solid transparent; 
 	border-bottom: 1px solid transparent;
 }
 
-.grid-container .top-hint-tile.edge {
+.top-hint-tile.edge {
 	border-bottom: 3px solid #353535;
 }
 
-.grid-container .left-hint-tile.edge {
+.left-hint-tile.edge {
 	border-right: 3px solid #353535;
 }
+
 
 .grid-container .left-landmark-tile {
 	border-left: 2px solid #353535;
@@ -53,3 +54,12 @@
 	border: none;
 }
 
+@media screen {
+	.trans-border, .grid-container .trans-border {
+		border: 1px solid transparent;
+	}
+
+	.trans-text {
+		color: transparent;
+	}
+}

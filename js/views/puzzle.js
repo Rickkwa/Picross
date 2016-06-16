@@ -52,8 +52,8 @@ app.PuzzleView = Backbone.View.extend({
 
 	handleCompletion: function() {
 		// $(".fill").css("background-color", "cyan");
-		$(".grid-container td").not(".fill").fadeTo(200, 0);
-		$(".grid-container td").removeClass("edge left-landmark-tile top-landmark-tile").addClass("h-trans-border v-trans-border");
+		$(".grid-container td").not(".fill").addClass("trans-text");
+		$(".grid-container td").addClass("trans-border");
 	},
 
 	drawPuzzle: function($container) {
