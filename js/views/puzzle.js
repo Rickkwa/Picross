@@ -45,9 +45,15 @@ app.PuzzleView = Backbone.View.extend({
 		// Check if the puzzle was successfully finished
 		// If so, lock the puzzle and give feedback
 		if (this.ansGridModel.equals(this.gridModel)) {
-			console.log("WINNER!");
 			this.completed = true;
+			this.handleCompletion();
 		}
+	},
+
+	handleCompletion: function() {
+		// $(".fill").css("background-color", "cyan");
+		$(".grid-container td").not(".fill").fadeTo(200, 0);
+		$(".grid-container td").removeClass("edge left-landmark-tile top-landmark-tile").addClass("h-trans-border v-trans-border");
 	},
 
 	drawPuzzle: function($container) {

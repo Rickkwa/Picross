@@ -3,8 +3,6 @@
 }
 
 .grid-tile {
-	/*width: 25px;
-	height: 25px;*/
 	background-color: white;
 	padding: 0;
 }
@@ -24,12 +22,12 @@
 	font-family: "New Courier";
 }
 
-.grid-container .left-hint-tile {
+.grid-container .left-hint-tile, .grid-container .h-trans-border {
 	border-left: 1px solid transparent; 
 	border-right: 1px solid transparent;
 }
 
-.grid-container .top-hint-tile {
+.grid-container .top-hint-tile, .grid-container .v-trans-border {
 	border-top: 1px solid transparent; 
 	border-bottom: 1px solid transparent;
 }
@@ -54,3 +52,4 @@
 	visibility: hidden;
 	border: none;
 }
+

@@ -44,6 +44,12 @@ header h1 {
 	padding: 10px 20px;
 }
 
+footer {
+	padding-top: 40px;
+	font-size: 0.8em;
+	color: #5e5e5e;
+}
+
 nav ul {
 	list-style-type: none;
 	margin: 0;
@@ -59,7 +65,7 @@ nav ul li a {
 	padding: 10px 15px;
 }
 
-main {
+.bg {
 	margin-top: 15px;
 	padding: 15px 20px;
 	background-color: white;
