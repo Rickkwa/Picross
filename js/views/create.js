@@ -41,25 +41,11 @@ app.CreateView = Backbone.View.extend({
 		// Handles mouseover and mousedown events
 		switch (e.buttons) {
 			case 1: // left click
-				this.setTile($(e.target), 1);
+				app.utils.setTile(this.gridModel, $(e.target), 1);
 				break;
 			case 2: // right click
-				this.setTile($(e.target), 0);
+				app.utils.setTile(this.gridModel, $(e.target), 0);
 				break;
-		}
-	},
-
-	setTile: function($tile, state) {
-		if (this.gridModel) {
-			// Fill/Unfill the tile based on state
-			if (state == 1)
-				$tile.addClass("fill");
-			else
-				$tile.removeClass("fill");
-
-			// Set the grid model to reflect
-			let {row, col} = $tile.data("coords");
-			this.gridModel.setState(row, col, state);
 		}
 	},
 

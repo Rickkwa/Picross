@@ -24,5 +24,19 @@ app.utils = {
 	transpose: function(arr) {
 		// From http://stackoverflow.com/a/17428779/2079781
 		return _.zip.apply(_, arr);
+	},
+
+	setTile: function(gridModel, $tile, state) {
+		if (gridModel) {
+			// Fill/Unfill the tile based on state
+			if (state == 1)
+				$tile.addClass("fill");
+			else
+				$tile.removeClass("fill");
+
+			// Set the grid model to reflect
+			let {row, col} = $tile.data("coords");
+			gridModel.setState(row, col, state);
+		}
 	}
 };
