@@ -10,13 +10,44 @@ app.PuzzleView = Backbone.View.extend({
 		this.$el.html(this.template());
 
 		this.gridModel = this.model;
+		this.ansGridModel = new app.Grid({ size: this.gridModel.get('size') });
 		this.drawPuzzle($(".grid-container"));
+
+		this.completed = false;
 
 		return this;
 	},
 
 	events: {
-		"click .do-print": "printDialog"
+		"click .do-print": "printDialog",
+		"mousedown .grid-tile": "tileHandler",
+		"mouseover .grid-tile": "tileHandler"
+	},
+
+	tileHandler: function(e) {
+		e.preventDefault();
+
+		if (this.completed)
+			return;
+
+		// Handles mouseover and mousedown events
+		switch (e.buttons) {
+			case 1: // left click
+				app.utils.setTile(this.ansGridModel, $(e.target), 1);
+				break;
+			case 2: // right click
+				app.utils.setTile(this.ansGridModel, $(e.target), 0);
+				break;
+		}
+
+		// TODO: Add an option that notifies the user if they're wrong when they fill in a tile
+
+		// Check if the puzzle was successfully finished
+		// If so, lock the puzzle and give feedback
+		if (this.ansGridModel.equals(this.gridModel)) {
+			console.log("WINNER!");
+			this.completed = true;
+		}
 	},
 
 	drawPuzzle: function($container) {
@@ -52,6 +83,7 @@ app.PuzzleView = Backbone.View.extend({
 					else {
 						// Draw playing tile
 						$col.addClass("grid-tile");
+						$col.data("coords", { row: (r - hints.colHints.maxSize), col: (c - hints.rowHints.maxSize) });
 						if ((c - hints.rowHints.maxSize) % 5 == 0)
 							$col.addClass("left-landmark-tile");
 						if ((r - hints.colHints.maxSize) % 5 == 0)

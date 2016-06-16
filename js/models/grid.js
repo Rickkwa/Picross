@@ -39,7 +39,10 @@ app.Grid = Backbone.Model.extend({
 		return this.get('grid')[r][c];
 	},
 
-	equals: function() {
+	equals: function(otherGrid) {
+		var thisFlat = _.flatten(this.get('grid'));
+		var otherFlat = _.flatten(otherGrid.get('grid'));
+		return thisFlat.join("") == otherFlat.join("");
 	},
 
 	encode: function() {
