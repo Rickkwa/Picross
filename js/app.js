@@ -51,13 +51,8 @@ app.AppRouter = Backbone.Router.extend({
 		var $container = $("#content");
 		var $innerContainer = $("<span></span>").addClass("inner-wrapper");
 		$container.append($innerContainer);
-		if (this.activeView) {
-			// http://stackoverflow.com/a/11534056/2079781
-			this.activeView.undelegateEvents();
-			this.activeView.$el.removeData().unbind();
-			this.activeView.remove();
-			Backbone.View.prototype.remove.call(this.activeView);
-		}
+
+		app.utils.destroyView(this.activeView);
 
 		var args = { el: $innerContainer.get(0) };
 		$.extend(args, otherArgs);

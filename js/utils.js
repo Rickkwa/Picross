@@ -38,5 +38,15 @@ app.utils = {
 			let {row, col} = $tile.data("coords");
 			gridModel.setState(row, col, state);
 		}
+	},
+
+	destroyView: function(view) {
+		if (view) {
+			// http://stackoverflow.com/a/11534056/2079781
+			view.undelegateEvents();
+			view.$el.removeData().unbind();
+			view.remove();
+			Backbone.View.prototype.remove.call(view);
+		}
 	}
 };
