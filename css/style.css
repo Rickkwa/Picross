@@ -101,6 +101,10 @@ nav ul li a {
 	margin-bottom: 30px;
 }
 
+.right-align {
+	text-align: right;
+}
+
 .modal {
 	width: 100%;
 	height: 100%;
@@ -120,8 +124,12 @@ nav ul li a {
 	z-index: 101;
 }
 
-.modal .modal-title, .modal .modal-content {
-	padding: 15px 20px;
+.modal .modal-title {
+	padding: 15px 20px 5px 20px;
+}
+
+.modal .modal-content {
+	padding: 5px 20px 15px 20px;
 }
 
 .modal .modal-title {

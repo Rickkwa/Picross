@@ -19,7 +19,7 @@ app.CreateView = Backbone.View.extend({
 
 		// Draw the initial grid
 		this.newPuzzle();
-
+		
 		return this;
 	},
 
