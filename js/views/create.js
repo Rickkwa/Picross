@@ -72,6 +72,12 @@ app.CreateView = Backbone.View.extend({
 			for (let c = 0; c < this.gridModel.getCols(); c++) {
 				let $col = $("<td></td>");
 				$col.addClass("grid-tile");
+
+				if (r > 0 && r % 5 == 0)
+					$col.addClass("top-landmark-tile");
+				if (c > 0 && c % 5 == 0)
+					$col.addClass("left-landmark-tile");
+
 				$col.data("coords", { row: r, col: c });
 				$row.append($col);
 			}
