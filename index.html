@@ -21,10 +21,8 @@
 		</div>
 	</header>
 
-	<div class="bg container">
-		<main id="content">
-		</main>
-
+	<div id="content-wrapper" class="bg container">
+		<main id="content"></main>
 		<footer></footer>
 	</div>
 
@@ -97,6 +95,15 @@
 			<div class="grid-container" oncontextmenu="return false"></div>
 		</section>
 	</script>
+
+	<script type="text/template" id="confirm-leave-template">
+		<section class="modal">
+			<div class="modal-inner">
+				<div class="modal-title">Confirm Leave</div>
+				<div class="modal-content">Are you sure you want to leave and discard your progress?</div>
+			</div>
+		</section>
+	</script>
 	
 	<!-- Vendors -->
 	<script src="js/vendor/jquery-3.0.0.js"></script>
@@ -114,6 +121,7 @@
 	<script src="js/views/credits.js"></script>
 	<script src="js/views/create.js"></script>
 	<script src="js/views/puzzle.js"></script>
+	<script src="js/views/confirm-leave.js"></script>
 
 	<!-- Utils -->
 	<script src="js/utils.js"></script>
