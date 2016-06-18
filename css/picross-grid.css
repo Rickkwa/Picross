@@ -5,12 +5,14 @@
 .grid-tile {
 	background-color: white;
 	padding: 0;
+	color: transparent;
 }
 
 .grid-container td {
 	border: 1px solid black;
 	width: 25px;
 	height: 25px;
+	line-height: 25px;
 }
 
 .grid-container td.fill {
@@ -61,5 +63,14 @@
 
 	.trans-text {
 		color: transparent;
+	}
+
+	.grid-tile {
+		color: #353535;
+		text-align: center;
+	}
+
+	.block::before {
+		content: "X";
 	}
 }

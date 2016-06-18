@@ -38,13 +38,17 @@ app.CreateView = Backbone.View.extend({
 	tileHandler: function(e) {
 		e.preventDefault();
 
+		let {row, col} = $(e.target).data("coords");
+
 		// Handles mouseover and mousedown events
 		switch (e.buttons) {
 			case 1: // left click
-				app.utils.setTile(this.gridModel, $(e.target), 1);
+				app.utils.setTile($(e.target), "fill", 1);
+				this.gridModel.setState(row, col, 1);
 				break;
 			case 2: // right click
-				app.utils.setTile(this.gridModel, $(e.target), 0);
+				app.utils.setTile($(e.target), "fill", 0);
+				this.gridModel.setState(row, col, 0);
 				break;
 		}
 	},

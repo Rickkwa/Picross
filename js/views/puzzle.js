@@ -4,16 +4,17 @@ app.PuzzleView = Backbone.View.extend({
 	template: _.template($("#puzzle-template").html()),
 
 	initialize: function() {
+		this.gridModel = this.model;
+		this.drawGridModel = new app.Grid({ size: this.gridModel.get('size') });
+		this.completed = false;
 	},
 
 	render: function() {
 		this.$el.html(this.template());
 
-		this.gridModel = this.model;
-		this.ansGridModel = new app.Grid({ size: this.gridModel.get('size') });
 		this.drawPuzzle($(".grid-container"));
 
-		this.completed = false;
+		$(".fill-control").prop("checked", true);
 
 		return this;
 	},
@@ -27,33 +28,57 @@ app.PuzzleView = Backbone.View.extend({
 	tileHandler: function(e) {
 		e.preventDefault();
 
-		if (this.completed)
+		if (this.completed || ![1, 2].includes(e.buttons))
 			return;
+
+		let $target = $(e.target);
+
+		let {row, col} = $target.data("coords");
+		let clickClass = $(".fill-control").prop("checked") ? "fill" : "block";
+
+		let state = null;
 
 		// Handles mouseover and mousedown events
 		switch (e.buttons) {
 			case 1: // left click
-				app.utils.setTile(this.ansGridModel, $(e.target), 1);
+				state = 1;
 				break;
 			case 2: // right click
-				app.utils.setTile(this.ansGridModel, $(e.target), 0);
+				state = 0;
 				break;
+		}
+
+		let canFill = clickClass == "fill" && !$target.hasClass("block");
+		let canBlock = clickClass == "block" && !$target.hasClass("fill");
+		if (canFill)
+			this.drawGridModel.setState(row, col, state);
+
+		if (canFill || canBlock) {
+			$target.removeClass("fill block");
+			app.utils.setTile($target, clickClass, state);
 		}
 
 		// TODO: Add an option that notifies the user if they're wrong when they fill in a tile
 
 		// Check if the puzzle was successfully finished
 		// If so, lock the puzzle and give feedback
-		if (this.ansGridModel.equals(this.gridModel)) {
+		if (this.drawGridModel.equals(this.gridModel)) {
 			this.completed = true;
 			this.handleCompletion();
 		}
 	},
 
+	blockTile: function($target, state) {
+		if (state == 1)
+			$target.addClass("blocK");
+		else
+			$target.removeClass("block");
+	},
+
 	handleCompletion: function() {
-		// $(".fill").css("background-color", "cyan");
 		$(".grid-container td").not(".fill").addClass("trans-text");
 		$(".grid-container td").addClass("trans-border");
+		$(".controls input").prop("disabled", true);
 	},
 
 	drawPuzzle: function($container) {

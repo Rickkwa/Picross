@@ -91,6 +91,11 @@
 			Create your own Picross puzzles at http://rickkwa.github.io/demo/picross
 		</section>
 
+		<section class="controls">
+			<label><input type="radio" class="fill-control" name="click-type"/> Fill</label>
+			<label><input type="radio" class="block-control" name="click-type"/> Block</label>
+		</section>
+
 		<section class="grid-container-wrapper">
 			<div class="grid-container" oncontextmenu="return false"></div>
 		</section>
@@ -116,7 +121,7 @@
 	<script src="js/vendor/backbone.js"></script>
 
 
-	<!-- Models -->
+	<!-- Models and Collections -->
 	<script src="js/models/puzzlesize.js"></script>
 	<script src="js/models/puzzlesizes.js"></script>
 	<script src="js/models/grid.js"></script> <!-- grid.js depends on puzzlesize.js -->
