@@ -76,7 +76,7 @@ app.PuzzleView = Backbone.View.extend({
 	},
 
 	handleCompletion: function() {
-		$(".grid-container td").not(".fill").addClass("trans-text");
+		$(".grid-container td, .grid-container .block").not(".fill").addClass("trans-text");
 		$(".grid-container td").addClass("trans-border");
 		$(".controls input").prop("disabled", true);
 	},

@@ -61,13 +61,13 @@
 		border: 1px solid transparent;
 	}
 
-	.trans-text {
-		color: transparent;
+	.block {
+		color: #969696;
+		text-align: center;
 	}
 
-	.grid-tile {
-		color: #353535;
-		text-align: center;
+	.trans-text {
+		color: transparent;
 	}
 
 	.block::before {
