@@ -61,7 +61,12 @@ app.Grid = Backbone.Model.extend({
 		// Decode the string and set the model's size and grid to reflect
 
 		var rows = str.split(",");
-		this.set({ 'size' : new app.PuzzleSize({ rows: rows.length, cols: rows[0].length * 5 }) });
+		var puzzleSize = new app.PuzzleSize({ rows: rows.length, cols: rows[0].length * 5 });
+
+		if (puzzleSize.validate().success == false)
+			throw "Invalid size of puzzle. Rows/cols should be in multiples of 5.";
+
+		this.set({ 'size' : puzzleSize });
 		this.clearGrid();
 
 		for (let r = 0; r < rows.length; r++) {
@@ -71,8 +76,11 @@ app.Grid = Backbone.Model.extend({
 			for (let i = 0; i < rows[r].length; i++) {
 				let char = rows[r].charAt(i);
 				let dec = this.decodeCharToNum(char);
+
+				if (dec < 0 || dec > 31)
+					throw "Decode out of range.";
+
 				let bin = app.utils.leftPad(app.utils.dec2bin(dec), "0", 5);
-				// console.log(bin);
 				for (let c = 0; c < bin.length; c++) {
 					this.setState(r, (i * 5) + c, bin.charAt(c));
 				}

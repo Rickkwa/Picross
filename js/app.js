@@ -34,7 +34,12 @@ app.AppRouter = Backbone.Router.extend({
 
 	showPuzzle: function(encode) {
 		var gridModel = new app.Grid();
-		gridModel.decode(encode);
+		try {
+			gridModel.decode(encode);
+		} catch(err) {
+			gridModel.destroy();
+			gridModel = null;
+		}
 
 		this.setView(app.PuzzleView, { model: gridModel });
 		document.title = this.title("Play");

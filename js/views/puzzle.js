@@ -4,15 +4,20 @@ app.PuzzleView = Backbone.View.extend({
 	template: _.template($("#puzzle-template").html()),
 
 	initialize: function() {
-		this.gridModel = this.model;
-		this.drawGridModel = new app.Grid({ size: this.gridModel.get('size') });
-		this.completed = false;
+		if (this.model) {
+			this.gridModel = this.model;
+			this.drawGridModel = new app.Grid({ size: this.gridModel.get('size') });
+			this.completed = false;
+		}
 	},
 
 	render: function() {
 		this.$el.html(this.template());
 
-		this.drawPuzzle($(".grid-container"));
+		if (this.model)
+			this.drawPuzzle($(".grid-container"));
+		else
+			this.displayDecodeError();
 
 		$(".fill-control").prop("checked", true);
 
@@ -165,6 +170,11 @@ app.PuzzleView = Backbone.View.extend({
 			rowHints: { maxSize: rMaxSize, hints: rHints }, 
 			colHints: { maxSize: cMaxSize, hints: cHints }
 		};
+	},
+
+	displayDecodeError: function() {
+		$(".instructions").html("Error: Invalid puzzle.");
+		$(".controls").hide();
 	},
 
 	printDialog: function() {
