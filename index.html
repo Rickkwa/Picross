@@ -28,10 +28,38 @@
 
 	<!-- Templates -->
 	<script type="text/template" id="home-template">
-		<section>
+		<section class="instructions">
 			<p>
-			Picross (also known as nonograms) is a picture based logic puzzle. You're given a grid with hints on the outer edges; using these hints, you must fill in the grid to reveal the picture answer.
+			Picross (also known as nonograms) is a picture based logic puzzle. You're given a grid with hints on the outer edges; using these hints, you must fill in the grid to reveal the hidden picture.
 			</p>
+
+			<p>
+			How do the hints work? Here is an example puzzle, along with its answer.
+			</p>
+
+			<div class="diagram-container fleft inline-block">
+				<p>The puzzle:</p>
+				<img src="img/tutorial-puzzle.png" alt="The puzzle" />
+			</div>
+
+			<div class="diagram-container fleft inline-block">
+				<p>The answer:</p>
+				<img src="img/tutorial-answer.png" alt="The answer"/>
+			</div>
+			<div class="clear"></div>
+
+			<p>
+			Notice on the first row, we have <span class="inline-code">3 1</span>. This means that in this row, we have a group of 3 adjacent tiles filled, followed by 1 or more empty tiles, followed by 1 filled tile. The order matters! The same goes with the columns. On the second and third column, we see, from top to bottom, <span class="inline-code">1 2</span>. So we should expect to see starting from the top, 1 filled in tile, followed by 1 or more empty tiles, followed by 2 adjacently filled in tiles. That is indeed the case for both column 2 and 3.
+			</p>
+
+			<p>
+			Most puzzles allow you to cross out tiles. This allows you to mark tiles you know are not in the answer. In this application, you can cross out a tile (block), and it will be shown by an X in the middle of it.
+			</p>
+			
+			<p>
+			And that's all there is to it! Using these hints, reveal the hidden answer!
+			</p>
+
 		</section>
 	</script>
 
@@ -41,7 +69,7 @@
 				Made by Ricky Kwan. Source code available on <a href="https://github.com/Rickkwa/Picross" target="_blank">GitHub</a>.
 			</p>
 			<p>
-				The application was made using the following JavaScript libraries:
+				The application was made using the following JavaScript libraries/frameworks:
 				<ul>
 					<li><a href="https://jquery.com/" target="_blank">jQuery</a></li>
 					<li><a href="http://underscorejs.org/" target="_blank">Underscore</a></li>
@@ -84,7 +112,15 @@
 		<link rel="stylesheet" type="text/css" media="print" href="css/print-puzzle.css" />
 
 		<section class="instructions">
-			Solve the puzzle here or <button class="do-print">Print</button> it out.
+			<p>Share this URL with a friend!</p>
+			<p>Solve the puzzle here or <button class="do-print">Print</button> it out.</p>
+
+			<div>
+				<ul>
+					<li>To fill/clear a tile, select the <strong>fill</strong> tool and <strong>left (fill)</strong> or <strong>right (unfill)</strong> click.</li>
+					<li>To block/unblock a tile, select the <strong>block</strong> tool and <strong>left (block)</strong> or <strong>right (unblock)</strong> click.</li>
+				</ul>
+			</div>
 		</section>
 
 		<section class="print-only print-instructions">
@@ -101,6 +137,7 @@
 		</section>
 	</script>
 
+	<!--
 	<script type="text/template" id="modal-template">
 		<section class="modal">
 			<div class="modal-inner">
@@ -108,12 +145,12 @@
 				<div class="modal-content">
 					<p class="message"></p>
 					<div class="right-align">
-						<!-- Buttons here -->
+						<button></button>
 					</div>
 				</div>
 			</div>
 		</section>
-	</script>
+	</script>-->
 	
 	<!-- Vendors -->
 	<script src="js/vendor/jquery-3.0.0.js"></script>

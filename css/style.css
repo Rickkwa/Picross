@@ -36,6 +36,14 @@ a.active {
 	border-bottom: 2px solid #353535;
 }
 
+p {
+	line-height: 1.7em;
+}
+
+img {
+	border-radius: 2px;
+}
+
 nav a:hover {
 	text-decoration: none;
 }
@@ -106,10 +114,45 @@ nav ul li a {
 	margin-bottom: 30px;
 }
 
+.diagram-container {
+	margin: 5px 20px;
+}
+
+.inline-code {
+	font-family: "Courier New";
+	background-color: #ededed;
+	padding: 1px 3px;
+	border-radius: 2px;
+}
+
 .right-align {
 	text-align: right;
 }
 
+.inline-block {
+	display: inline-block;
+}
+
+.fleft {
+	float: left;
+}
+
+.clear {
+	clear: both;
+}
+
+.print-only { /* Hide when its not in print */
+	display: none;
+}
+
+@media print {
+	.print-only {
+		display: inline-block;
+	}
+}
+
+
+/*
 .modal {
 	width: 100%;
 	height: 100%;
@@ -140,13 +183,4 @@ nav ul li a {
 .modal .modal-title {
 	font-weight: bold;
 }
-
-.print-only { /* Hide when its not in print */
-	display: none;
-}
-
-@media print {
-	.print-only {
-		display: inline-block;
-	}
-}
+*/
