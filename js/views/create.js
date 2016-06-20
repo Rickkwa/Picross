@@ -64,12 +64,18 @@ app.CreateView = Backbone.View.extend({
 		// Draw a new grid
 		var $container = $(".grid-container");
 		this.gridModel = new app.Grid({ size: size });
-		this.drawGrid($container);
-		// TODO: Change tile size based on container width
+		this.drawGrid($container, 600, 25); // 600 is best size since 5, 10, 15, 20, 25 are all factors of it
+		// console.log($(".create-right").width());
 	},
 
-	drawGrid: function($container) {
+	drawGrid: function($container, targetWidth, minWidth) {
 		var $table = $("<table></table>");
+		$table.attr("align", "right");
+
+		// Dynamically set cell width
+		let cellWidth = null;
+		if (targetWidth)
+			cellWidth = Math.floor(targetWidth / this.gridModel.getCols());
 
 		for (let r = 0; r < this.gridModel.getRows(); r++) {
 			let $row = $("<tr></tr>");
@@ -81,6 +87,8 @@ app.CreateView = Backbone.View.extend({
 					$col.addClass("top-landmark-tile");
 				if (c > 0 && c % 5 == 0)
 					$col.addClass("left-landmark-tile");
+				if (cellWidth && cellWidth >= minWidth)
+					$col.css({ width: cellWidth + "px", height: cellWidth + "px" });
 
 				$col.data("coords", { row: r, col: c });
 				$row.append($col);

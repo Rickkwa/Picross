@@ -86,7 +86,7 @@ app.PuzzleView = Backbone.View.extend({
 		$(".controls input").prop("disabled", true);
 	},
 
-	drawPuzzle: function($container) {
+	drawPuzzle: function($container, targetWidth) {
 		var hints = this.getHints();
 
 		var totalRows = this.gridModel.getRows() + hints.colHints.maxSize;

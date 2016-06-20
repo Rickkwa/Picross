@@ -97,6 +97,22 @@ nav ul li a {
 	width: 200px;
 }
 
+.create-left {
+	width: 30%;
+}
+
+.create-left section {
+	margin-bottom: 30px;
+}
+
+.create-right {
+	width: 70%;
+}
+
+.create-left, .create-right {
+	box-sizing: border-box;
+}
+
 #create-btn {
 	border-radius: 2px;
 	width: 200px;
@@ -135,6 +151,10 @@ nav ul li a {
 
 .fleft {
 	float: left;
+}
+
+.fright {
+	float: right;
 }
 
 .clear {

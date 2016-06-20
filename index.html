@@ -80,32 +80,41 @@
 	</script>
 
 	<script type="text/template" id="create-template">
-		<section>
-			<h2>Step 1: Choose a size</h2>
-			<select id="size-index">
-				<% for (let i = 0; i < sizes.length; i++) { 
-					let size = sizes.at(i);
-				%>
-				<option <%= size.get('defaultSelected') ? "selected" : "" %> value="<%= i %>"><%- size.rows() + " x " + size.cols() %></option>
-				<% } %>
-			</select>
-		</section>
+		<div class="create-left fleft">
+			<section>
+				<h3>Step 1: Pick a Size</h3>
+				<select id="size-index">
+					<% for (let i = 0; i < sizes.length; i++) { 
+						let size = sizes.at(i);
+					%>
+					<option <%= size.get('defaultSelected') ? "selected" : "" %> value="<%= i %>"><%- size.rows() + " x " + size.cols() %></option>
+					<% } %>
+				</select>
+			</section>
 
-		<section>
-			<h2>Step 2: Draw your picture</h2>
-			<div>
-				<ul>
-					<li>To fill in a tile, use <strong>left click</strong>.</li>
-					<li>To clear a tile, use <strong>right click</strong>.</li>
-				</ul>
-			</div>
-			<div class="grid-container" oncontextmenu="return false"></div>
-		</section>
+			<section>
+				<h3>Step 2: Draw a Picture</h3>
+				<div>
+					<ul>
+						<li>To fill in a tile, use <strong>left click</strong>.</li>
+						<li>To clear a tile, use <strong>right click</strong>.</li>
+					</ul>
+				</div>
+			</section>
 
-		<section>
-			<h2>Step 3: Create your Picross puzzle!</h2>
-			<button id="create-btn">Create</button>
-		</section>
+			<section>
+				<h3>Step 3: Create</h3>
+				<button id="create-btn">Create</button>
+			</section>
+		</div>
+
+		<div class="create-right fright">
+			<section>
+				<div class="grid-container" oncontextmenu="return false"></div>
+			</section>
+		</div>
+
+		<div class="clear"></div>
 	</script>
 
 	<script type="text/template" id="puzzle-template">

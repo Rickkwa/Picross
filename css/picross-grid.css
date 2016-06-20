@@ -12,7 +12,8 @@
 	border: 1px solid black;
 	width: 25px;
 	height: 25px;
-	line-height: 25px;
+	/*line-height: 25px;*/
+	box-sizing: border-box;
 }
 
 .grid-container td.fill {
