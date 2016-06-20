@@ -14,8 +14,10 @@ app.PuzzleView = Backbone.View.extend({
 	render: function() {
 		this.$el.html(this.template());
 
-		if (this.model)
-			this.drawPuzzle($(".grid-container"));
+		if (this.model) {
+			let targetWidth = Math.min(this.model.getCols() * 45, 900);
+			this.drawPuzzle($(".grid-container"), targetWidth);
+		}
 		else
 			this.displayDecodeError();
 
@@ -92,11 +94,15 @@ app.PuzzleView = Backbone.View.extend({
 		var totalRows = this.gridModel.getRows() + hints.colHints.maxSize;
 		var totalCols = this.gridModel.getCols() + hints.rowHints.maxSize;
 
+		// Dynamically set cell width
+		let cellWidth = targetWidth ? Math.floor(targetWidth / totalCols) : null;
+
 		// Pad them both by mapping each of them
 		var rHints = hints.rowHints.hints.map(arr => app.utils.arrLeftPad(arr, " ", hints.rowHints.maxSize));
 		var cHints = hints.colHints.hints.map(arr => app.utils.arrLeftPad(arr, " ", hints.colHints.maxSize));
 
 		var $table = $("<table></table>");
+		$table.attr("align", "center");
 		for (let r  = 0; r < totalRows; r++) {
 			let $row = $("<tr></tr>");
 			for (let c = 0; c < totalCols; c++) {
@@ -129,6 +135,8 @@ app.PuzzleView = Backbone.View.extend({
 				if (c == hints.rowHints.maxSize - 1 || r == hints.colHints.maxSize - 1)
 					$col.addClass("edge");
 
+				if (cellWidth)
+					$col.css({ width: cellWidth + "px", height: cellWidth + "px" });
 				$row.append($col);
 			}
 			$table.append($row);

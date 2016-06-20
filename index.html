@@ -104,11 +104,11 @@
 
 			<section>
 				<h3>Step 3: Create</h3>
-				<button id="create-btn">Create</button>
+				<button id="create-btn" class="btn">Create</button>
 			</section>
 		</div>
 
-		<div class="create-right fright">
+		<div class="create-right fleft">
 			<section>
 				<div class="grid-container" oncontextmenu="return false"></div>
 			</section>
@@ -137,13 +137,15 @@
 		</section>
 
 		<section class="controls">
-			<label><input type="radio" class="fill-control" name="click-type"/> Fill</label>
-			<label><input type="radio" class="block-control" name="click-type"/> Block</label>
+			<input type="radio" class="fill-control" name="click-type" id="click-fill"/><label class="btn" for="click-fill"> Fill</label>
+			<input type="radio" class="block-control" name="click-type" id="click-block"/><label class="btn" for="click-block"> Block</label>
 		</section>
 
-		<section class="grid-container-wrapper">
+		<section>
 			<div class="grid-container" oncontextmenu="return false"></div>
 		</section>
+
+		<div class="clear"></div>
 	</script>
 
 	<!--

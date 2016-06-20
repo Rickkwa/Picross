@@ -64,11 +64,11 @@ app.CreateView = Backbone.View.extend({
 		// Draw a new grid
 		var $container = $(".grid-container");
 		this.gridModel = new app.Grid({ size: size });
-		this.drawGrid($container, 600, 20); // 600 is best size since 5, 10, 15, 20, 25 are all factors of it
+		this.drawGrid($container, 600); // 600 is best size since 5, 10, 15, 20, 25 are all factors of it
 		// console.log($(".create-right").width());
 	},
 
-	drawGrid: function($container, targetWidth, minWidth) {
+	drawGrid: function($container, targetWidth) {
 		var $table = $("<table></table>");
 		$table.attr("align", "right");
 
@@ -85,7 +85,7 @@ app.CreateView = Backbone.View.extend({
 					$col.addClass("top-landmark-tile");
 				if (c > 0 && c % 5 == 0)
 					$col.addClass("left-landmark-tile");
-				if (cellWidth && cellWidth >= minWidth)
+				if (cellWidth)
 					$col.css({ width: cellWidth + "px", height: cellWidth + "px" });
 
 				$col.data("coords", { row: r, col: c });

@@ -118,16 +118,48 @@ nav ul li a {
 	width: 200px;
 	padding: 10px 0;
 	font-size: 1.5em;
-	background-color: #CECECE;
-	border: 1px solid #353535;
+	border: none;
 }
 
 #create-btn:hover {
-	border: 1px solid transparent;
+}
+
+.btn {
+	border-radius: 2px;
+	background-color: #d8d8d8;
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+}
+
+.btn:hover {
+	background-color: #CECECE;
+
 }
 
 .instructions {
 	margin-bottom: 30px;
+}
+
+.controls {
+	margin-bottom: 15px;
+}
+
+.controls input[type=radio] {
+	position: absolute;
+	visibility: hidden; 
+	opacity: 0;
+}
+
+.controls input[type=radio] + label {
+	min-width: 150px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	font-size: 1.1em;
+}
+
+.controls input[type=radio]:checked + label {
+	border-bottom: 2px solid #353535;
 }
 
 .diagram-container {
