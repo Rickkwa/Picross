@@ -64,7 +64,7 @@ app.CreateView = Backbone.View.extend({
 		// Draw a new grid
 		var $container = $(".grid-container");
 		this.gridModel = new app.Grid({ size: size });
-		this.drawGrid($container, 600, 25); // 600 is best size since 5, 10, 15, 20, 25 are all factors of it
+		this.drawGrid($container, 600, 20); // 600 is best size since 5, 10, 15, 20, 25 are all factors of it
 		// console.log($(".create-right").width());
 	},
 
@@ -73,9 +73,7 @@ app.CreateView = Backbone.View.extend({
 		$table.attr("align", "right");
 
 		// Dynamically set cell width
-		let cellWidth = null;
-		if (targetWidth)
-			cellWidth = Math.floor(targetWidth / this.gridModel.getCols());
+		let cellWidth = targetWidth ? Math.floor(targetWidth / this.gridModel.getCols()) : null;
 
 		for (let r = 0; r < this.gridModel.getRows(); r++) {
 			let $row = $("<tr></tr>");
