@@ -31,6 +31,10 @@ app.CreateView = Backbone.View.extend({
 	},
 
 	doCreate: function() {
+		if (this.gridModel.numberOfFilled() == 0) {
+			$("#create-error").text("Please fill in at least one tile.");
+			return;
+		}
 		// Encode the grid and send to route
 		app.router.navigate("puzzle/" + this.gridModel.encode(), true);
 	},
